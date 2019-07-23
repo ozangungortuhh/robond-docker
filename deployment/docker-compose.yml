@@ -1,10 +1,10 @@
 version: "2.3"
 
 services:
-  ros_kinetic_desktop:
-    image: ros_kinetic_desktop
+  ros_melodic_desktop:
+    image: ros_melodic_desktop
     build: ../
-    container_name: ros_kinetic_desktop
+    container_name: ros_melodic_desktop
     ports:
       - 6080:80
     environment:
