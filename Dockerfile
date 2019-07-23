@@ -3,7 +3,8 @@ FROM dorowu/ubuntu-desktop-lxde-vnc
 LABEL maintainer "bpinaya@wpi.edu"
 
 RUN apt-get update -y 
-RUN apt-get install dirmngr -y
+RUN apt-get install dirmngr -y 
+RUN apt-get install nano -y
 
 # Adding keys for ROS
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -15,6 +16,13 @@ RUN apt-get update && apt-get install -y ros-melodic-desktop-full \
 RUN rosdep init && rosdep update
 
 RUN /bin/bash -c "echo 'export HOME=/home/ubuntu' >> /root/.bashrc && source /root/.bashrc"
+
+# Install moveit and universal robot packages
+
+RUN apt-get update &&\
+    apt-get install ros-melodic-moveit -y &&\
+    apt-get install ros-melodic-moveit-visual-tools -y &&\
+    rm -rf /var/lib/apt/lists/*
 
 # Creating ROS_WS
 RUN mkdir -p ~/ros_ws/src
