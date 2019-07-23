@@ -14,8 +14,12 @@ RUN apt-get update && apt-get install -y ros-kinetic-desktop-full \
 		wget git nano
 RUN rosdep init && rosdep update
 
-
 RUN /bin/bash -c "echo 'export HOME=/home/ubuntu' >> /root/.bashrc && source /root/.bashrc"
+# Install moveit and universal robot packages
+RUN apt-get update &&\
+    apt-get install ros-kinetic-moveit -y &&\
+    apt-get install ros-kinetic-moveit-visual-tools -y &&\
+    rm -rf /var/lib/apt/lists/*
 
 # Creating ROS_WS
 RUN mkdir -p ~/ros_ws/src
